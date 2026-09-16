@@ -44,7 +44,7 @@ function HomeB({ lang, setRoute, openProject }) {
             }}>
               {I18N.hero.line1[lang]}<br/>{I18N.hero.line2[lang]}
             </div>
-            <img src="/assets/logo-portrait-green-transparent.png" style={{ height: '46vh', filter: 'brightness(0) saturate(100%) invert(93%) sepia(9%) saturate(334%) hue-rotate(19deg) brightness(100%) contrast(91%)' }} />
+            <img src="/assets/logo-portrait-green-transparent.webp" style={{ height: '46vh', filter: 'brightness(0) saturate(100%) invert(93%) sepia(9%) saturate(334%) hue-rotate(19deg) brightness(100%) contrast(91%)' }} />
             <div style={{
               fontFamily: TOKENS.fontDisplay, fontWeight: 700,
               fontSize: 'clamp(80px, 14vw, 240px)', lineHeight: 0.82, letterSpacing: -6,
@@ -116,7 +116,7 @@ function HomeB({ lang, setRoute, openProject }) {
       <section style={{ background: TOKENS.ink, color: TOKENS.cream, padding: '120px 40px' }}>
         <div style={{ maxWidth: 1440, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.3fr', gap: 60, alignItems: 'center' }}>
           <div style={{ background: TOKENS.terracotta, aspectRatio: '3/4', position: 'relative', overflow: 'hidden' }}>
-            <img src="/assets/foto-work.png" style={{ width: '100%', height: '100%', objectFit: 'cover', mixBlendMode: 'multiply', filter: 'grayscale(1)' }} />
+            <img src="/assets/foto-work.webp" style={{ width: '100%', height: '100%', objectFit: 'cover', mixBlendMode: 'multiply', filter: 'grayscale(1)' }} />
           </div>
           <div>
             <div style={{ fontFamily: TOKENS.fontMono, fontSize: 11, letterSpacing: 1.5, opacity: 0.6, marginBottom: 10 }}>(03) {I18N.about.kicker[lang]}</div>
