@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Alen Gomez · Art Director</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400;0,500;0,700;0,900;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="/public/favicon.svg" />
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { font-family: Inter, system-ui, sans-serif; background: #F4F0E6; color: #0A0A0A; overflow-x: hidden; }
+  * { box-sizing: border-box; }
+  ::selection { background: #E86A33; color: #F4F0E6; }
+  a { color: inherit; }
+  [data-screen-label] { scroll-margin-top: 80px; }
+  .nav-link:hover { color: #E86A33 !important; }
+  .btn-solid:hover { background: #E86A33 !important; }
+  .btn-outline:hover { border-color: #E86A33 !important; color: #E86A33 !important; }
+  /* Cabeza que se despliega al hacer hover en CV (de abajo hacia arriba) */
+  .cv-hover .cv-head {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 2px;
+    width: 96px; height: 151px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 90;
+  }
+  .cv-hover .cv-head > span {
+    display: block;
+    width: 100%; height: 100%;
+    background-image: url(/public/logo-static.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform .55s cubic-bezier(.16,.84,.44,1), opacity .3s ease;
+  }
+  .cv-hover:hover .cv-head > span {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cv-hover .cv-head > span { transition: opacity .2s ease; transform: none; }
+  }
+  /* Entrada de tiles al filtrar por categoría (Work) */
+  @keyframes tileIn {
+    from { opacity: 0; transform: translateY(16px) scale(.975); filter: blur(2px); }
+    to   { opacity: 1; transform: none; filter: blur(0); }
+  }
+  .tile-anim { animation: tileIn .5s cubic-bezier(.2,.85,.3,1) both; }
+  @media (prefers-reduced-motion: reduce) { .tile-anim { animation: none; } }
+  /* Scroll reveal — la página se va "organizando" al hacer scroll */
+  .reveal-init { opacity: 0; transform: translateY(28px); transition: opacity .75s cubic-bezier(.16,.84,.44,1), transform .75s cubic-bezier(.16,.84,.44,1); }
+  .reveal-in { opacity: 1 !important; transform: none !important; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-init { opacity: 1; transform: none; transition: none; }
+  }
+  /* Barra de navegación inferior (móvil): deja aire para que no tape el contenido/footer */
+  @media (max-width: 900px) {
+    body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+  }
+  /* Carrusel de proyectos (móvil): arrastre rotacional */
+  .cat-stage { touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+  .cat-stage * { -webkit-user-select: none; }
+  /* Fila de categorías deslizante (móvil) */
+  .cat-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+  .cat-scroll::-webkit-scrollbar { display: none; }
+  /* Entrada suave de elementos al cargar */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  .fade-up { animation: fadeUp .6s cubic-bezier(.16,.84,.44,1) both; }
+  @keyframes popIn { 0% { opacity: 0; transform: scale(.8); } 60% { transform: scale(1.06); } 100% { opacity: 1; transform: scale(1); } }
+  .pop-in { animation: popIn .5s cubic-bezier(.34,1.56,.64,1) both; }
+  /* Estiramiento líquido de la burbuja del tab bar al deslizarse */
+  @keyframes liquid { 0% { transform: scaleX(1) scaleY(1); } 35% { transform: scaleX(1.6) scaleY(.86); } 70% { transform: scaleX(.9) scaleY(1.05); } 100% { transform: scaleX(1) scaleY(1); } }
+  .liquid { animation: liquid .52s cubic-bezier(.4,.1,.2,1) both; }
+  @media (prefers-reduced-motion: reduce) { .fade-up, .pop-in, .liquid { animation: none; } }
+
+  /* ── Intro / preloader: cortina verde que se retira revelando el hero ── */
+  .intro-veil {
+    position: fixed; inset: 0; z-index: 300;
+    background: #005032; color: #F4F0E6;
+    display: flex; flex-direction: column;
+    padding: 40px;
+    transition: transform .85s cubic-bezier(.76,0,.24,1);
+    will-change: transform;
+  }
+  .intro-veil.lift { transform: translateY(-101%); pointer-events: none; }
+  .intro-stage { flex: 1; display: flex; align-items: center; }
+  .intro-name {
+    font-family: "Archivo Narrow", sans-serif; font-weight: 700;
+    text-transform: uppercase; letter-spacing: -4px; line-height: .88;
+    font-size: clamp(56px, 12vw, 168px);
+  }
+  .intro-line { overflow: hidden; }
+  .intro-line > span { display: inline-block; transform: translateY(110%); animation: introRise .85s cubic-bezier(.16,.84,.44,1) forwards; }
+  .intro-line + .intro-line > span { animation-delay: .12s; }
+  @keyframes introRise { to { transform: translateY(0); } }
+  .intro-foot {
+    display: flex; justify-content: space-between; align-items: flex-end; gap: 20px;
+    font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 1.5px;
+    opacity: .8; text-transform: uppercase;
+  }
+  .intro-pct {
+    font-family: "Archivo Narrow", sans-serif; font-weight: 700;
+    font-size: clamp(40px, 7vw, 92px); letter-spacing: -2px; line-height: .8; opacity: 1;
+  }
+  .intro-bar { height: 2px; background: rgba(244,240,230,0.22); margin-top: 16px; overflow: hidden; }
+  .intro-bar > i { display: block; height: 100%; background: #E86A33; width: 0%; }
+
+  /* ── Entrada escalonada del hero al retirarse la cortina ── */
+  .hero-item { opacity: 0; transform: translateY(26px); transition: opacity .85s cubic-bezier(.16,.84,.44,1), transform .85s cubic-bezier(.16,.84,.44,1); }
+  body.hero-go .hero-item { opacity: 1; transform: none; }
+  .hero-title { opacity: 0; clip-path: inset(0 0 108% 0); transition: opacity .9s ease, clip-path 1s cubic-bezier(.76,0,.24,1); }
+  body.hero-go .hero-title { opacity: 1; clip-path: inset(0 0 -12% 0); }
+  @media (prefers-reduced-motion: reduce) {
+    .intro-veil { display: none !important; }
+    .hero-item, .hero-title { opacity: 1 !important; transform: none !important; clip-path: none !important; transition: none !important; }
+    .intro-line > span { animation: none !important; transform: none !important; }
+  }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="duotone-green" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0 0 0 1 0"/>
+    <feComponentTransfer>
+      <feFuncR type="table" tableValues="0.0 0.96"/>
+      <feFuncG type="table" tableValues="0.19 0.94"/>
+      <feFuncB type="table" tableValues="0.12 0.90"/>
+    </feComponentTransfer>
+  </filter>
+</svg>
+<script type="text/babel" src="web/data.jsx?v=28"></script>
+<script type="text/babel" src="web/i18n.jsx?v=28"></script>
+<script type="text/babel" src="web/project-tile.jsx?v=28"></script>
+<script type="text/babel" src="web/chrome.jsx?v=28"></script>
+<script type="text/babel" src="web/home-a.jsx?v=28"></script>
+<script type="text/babel" src="web/home-b.jsx?v=28"></script>
+<script type="text/babel" src="web/pages.jsx?v=28"></script>
+<script type="text/babel">
+const TWEAKS = /*EDITMODE-BEGIN*/{
+  "homeVariant": "A"
+}/*EDITMODE-END*/;
+
+// Intro / preloader — cortina editorial que cuenta 0→100 y se retira revelando el hero.
+// Se muestra UNA sola vez por carga (vive en App, que monta una vez).
+function Preloader({ onLift }) {
+  const [pct, setPct] = React.useState(0);
+  const [lift, setLift] = React.useState(false);
+  const [gone, setGone] = React.useState(false);
+
+  React.useEffect(() => {
+    const DUR = 950;  // duración del conteo
+    const STEP = 30;  // ms por paso (timers: fiables aunque rAF esté throttled)
+    let elapsed = 0;
+    const id = setInterval(() => {
+      elapsed += STEP;
+      const p = Math.min(elapsed / DUR, 1);
+      const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+      setPct(Math.round(eased * 100));
+      if (p >= 1) {
+        clearInterval(id);
+        // breve pausa en 100%, luego levantar la cortina y arrancar el hero
+        setTimeout(() => {
+          onLift && onLift();      // el hero empieza a ensamblarse mientras sube la cortina
+          setLift(true);
+          setTimeout(() => setGone(true), 900); // desmonta tras la transición de salida
+        }, 160);
+      }
+    }, STEP);
+    return () => clearInterval(id);
+  }, []);
+
+  if (gone) return null;
+  return (
+    <div className={'intro-veil' + (lift ? ' lift' : '')} aria-hidden="true">
+      <div className="intro-stage">
+        <div className="intro-name">
+          <div className="intro-line"><span>ALEN</span></div>
+          <div className="intro-line"><span>GÓMEZ<span style={{ color: '#E86A33' }}>.</span></span></div>
+        </div>
+      </div>
+      <div>
+        <div className="intro-foot">
+          <span>ART DIRECTOR — BUCARAMANGA · 2026</span>
+          <span className="intro-pct">{pct}%</span>
+        </div>
+        <div className="intro-bar"><i style={{ width: pct + '%' }} /></div>
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  const prefersReduced = React.useMemo(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches, []
+  );
+  const [showIntro] = React.useState(() => !prefersReduced);
+  const [lang, setLang] = React.useState(() => localStorage.getItem('ag_lang') || 'es');
+  const [route, setRouteState] = React.useState(() => localStorage.getItem('ag_route') || 'home');
+  const [currentProject, setCurrentProject] = React.useState(null);
+  const [variant, setVariant] = React.useState(TWEAKS.homeVariant);
+  const [editMode, setEditMode] = React.useState(false);
+
+  const setRoute = (r) => {
+    setRouteState(r);
+    localStorage.setItem('ag_route', r);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  };
+  React.useEffect(() => { localStorage.setItem('ag_lang', lang); }, [lang]);
+
+  const openProject = (p) => { setCurrentProject(p); setRoute('project'); };
+
+  // Ensamblaje del hero: si no hay intro (reduced-motion), mostrar todo ya.
+  // Fallback: garantizar que el hero se revele aunque el intro se demore.
+  React.useEffect(() => {
+    if (!showIntro) { document.body.classList.add('hero-go'); return; }
+    const fb = setTimeout(() => document.body.classList.add('hero-go'), 3500);
+    return () => clearTimeout(fb);
+  }, []);
+
+  // Scroll reveal global — cada bloque aparece al entrar en viewport
+  React.useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('reveal-in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+    const timer = setTimeout(() => {
+      const sections = document.querySelectorAll('main section');
+      sections.forEach((sec, si) => {
+        // el primer bloque de la home (hero) queda siempre visible
+        if (si === 0) return;
+        let items = sec.querySelectorAll(':scope > div > *');
+        if (!items.length) items = [sec];
+        items.forEach((el, i) => {
+          el.classList.add('reveal-init');
+          el.style.transitionDelay = (Math.min(i, 6) * 70) + 'ms';
+          io.observe(el);
+        });
+      });
+    }, 90);
+
+    return () => { clearTimeout(timer); io.disconnect(); };
+  }, [route, variant, lang]);
+
+  React.useEffect(() => {
+    const onMsg = (e) => {
+      if (e.data?.type === '__activate_edit_mode') setEditMode(true);
+      if (e.data?.type === '__deactivate_edit_mode') setEditMode(false);
+    };
+    window.addEventListener('message', onMsg);
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
+
+  const changeVariant = (v) => {
+    setVariant(v);
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { homeVariant: v } }, '*');
+  };
+
+  return (
+    <div>
+      <Header lang={lang} setLang={setLang} route={route} setRoute={setRoute} />
+      <main>
+        {route === 'home' && variant === 'A' && <HomeA lang={lang} setRoute={setRoute} openProject={openProject} />}
+        {route === 'home' && variant === 'B' && <HomeB lang={lang} setRoute={setRoute} openProject={openProject} />}
+        {route === 'work' && <WorkPage lang={lang} openProject={openProject} />}
+        {route === 'about' && <AboutPage lang={lang} />}
+        {route === 'contact' && <ContactPage lang={lang} />}
+        {route === 'project' && <CaseStudyPage p={currentProject} lang={lang} setRoute={setRoute} />}
+      </main>
+      <Footer lang={lang} setRoute={setRoute} />
+      <BottomNav lang={lang} route={route} setRoute={setRoute} />
+
+      {showIntro && <Preloader onLift={() => document.body.classList.add('hero-go')} />}
+
+      {editMode && (
+        <div style={{
+          position: 'fixed', bottom: 24, right: 24, zIndex: 200,
+          background: '#0A0A0A', color: '#F4F0E6', padding: 20, borderRadius: 12,
+          fontFamily: 'Inter, sans-serif', width: 260,
+          boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
+        }}>
+          <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 10, letterSpacing: 1.5, opacity: 0.6, marginBottom: 12 }}>TWEAKS</div>
+          <div style={{ fontSize: 13, fontWeight: 500, marginBottom: 10 }}>Home variant</div>
+          <div style={{ display: 'flex', gap: 8 }}>
+            {['A', 'B'].map(v => (
+              <button key={v} onClick={() => changeVariant(v)} style={{
+                flex: 1, padding: '10px 12px', borderRadius: 999,
+                background: variant === v ? '#E86A33' : 'transparent',
+                color: '#F4F0E6', border: '1px solid rgba(244,240,230,0.3)',
+                fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 500, cursor: 'pointer',
+              }}>{v === 'A' ? 'A · Editorial' : 'B · Expresivo'}</button>
+            ))}
+          </div>
+          <div style={{ fontSize: 11, opacity: 0.6, marginTop: 10, lineHeight: 1.4 }}>
+            A: layout calmado, hero con foto.<br/>B: inmersivo verde, tipo interactiva.
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
