@@ -46,12 +46,11 @@ function HomeA({ lang, setRoute, openProject }) {
             WebkitMaskImage: 'linear-gradient(to bottom, #000 90%, transparent 100%)',
             maskImage: 'linear-gradient(to bottom, #000 90%, transparent 100%)',
           }}>
-            <video autoPlay loop muted playsInline style={{
+            <video autoPlay loop muted playsInline poster="/public/videoperfil-poster.webp" style={{
               position: 'absolute', inset: 0, width: '100%', height: '100%',
               objectFit: 'contain', objectPosition: 'center bottom', display: 'block',
             }}>
               <source src="/public/videoperfil.webm" type="video/webm" />
-              <source src="/public/videoperfil.mp4" type="video/mp4" />
             </video>
           </div>
           <h1 className="hero-title" style={{
@@ -117,14 +116,13 @@ function HomeA({ lang, setRoute, openProject }) {
               maskImage: 'linear-gradient(to bottom, #000 74%, transparent 100%)',
             }}>
               <video
-                autoPlay loop muted playsInline
+                autoPlay loop muted playsInline poster="/public/videoperfil-poster.webp"
                 style={{
                   width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center bottom',
                   display: 'block',
                 }}
               >
                 <source src="/public/videoperfil.webm" type="video/webm" />
-                <source src="/public/videoperfil.mp4" type="video/mp4" />
               </video>
             </div>
             <div style={{
