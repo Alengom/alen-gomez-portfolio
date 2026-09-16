@@ -1,3 +1,26 @@
+// Apple (iOS/Safari) reproduce WebM pero IGNORA el canal alfa (lo pinta negro).
+// En esos navegadores mostramos la imagen transparente en vez del video.
+const APPLE_NO_ALPHA_VIDEO = (() => {
+  if (typeof navigator === 'undefined') return false;
+  const ua = navigator.userAgent || '';
+  const iOS = /iP(hone|ad|od)/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const isSafari = /^((?!chrome|crios|android|fxios|edg|opr).)*safari/i.test(ua);
+  return iOS || isSafari;
+})();
+
+// Media del hero: video (WebM alfa) donde se soporta; imagen transparente en Apple/Safari.
+function HeroMedia({ style }) {
+  const s = { objectFit: 'contain', objectPosition: 'center bottom', display: 'block', ...style };
+  if (APPLE_NO_ALPHA_VIDEO) {
+    return <img src="/public/videoperfil-poster.webp" alt="Alen Gómez" style={s} />;
+  }
+  return (
+    <video autoPlay loop muted playsInline poster="/public/videoperfil-poster.webp" style={s}>
+      <source src="/public/videoperfil.webm" type="video/webm" />
+    </video>
+  );
+}
+
 // Home variant A — Editorial calmado
 function HomeA({ lang, setRoute, openProject }) {
   const featured = PROJECTS.slice(0, 6);
@@ -46,12 +69,7 @@ function HomeA({ lang, setRoute, openProject }) {
             WebkitMaskImage: 'linear-gradient(to bottom, #000 90%, transparent 100%)',
             maskImage: 'linear-gradient(to bottom, #000 90%, transparent 100%)',
           }}>
-            <video autoPlay loop muted playsInline poster="/public/videoperfil-poster.webp" style={{
-              position: 'absolute', inset: 0, width: '100%', height: '100%',
-              objectFit: 'contain', objectPosition: 'center bottom', display: 'block',
-            }}>
-              <source src="/public/videoperfil.webm" type="video/webm" />
-            </video>
+            <HeroMedia style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
           </div>
           <h1 className="hero-title" style={{
             fontFamily: TOKENS.fontDisplay,
@@ -115,15 +133,7 @@ function HomeA({ lang, setRoute, openProject }) {
               WebkitMaskImage: 'linear-gradient(to bottom, #000 74%, transparent 100%)',
               maskImage: 'linear-gradient(to bottom, #000 74%, transparent 100%)',
             }}>
-              <video
-                autoPlay loop muted playsInline poster="/public/videoperfil-poster.webp"
-                style={{
-                  width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center bottom',
-                  display: 'block',
-                }}
-              >
-                <source src="/public/videoperfil.webm" type="video/webm" />
-              </video>
+              <HeroMedia style={{ width: '100%', height: '100%' }} />
             </div>
             <div style={{
               position: 'absolute', bottom: 20, left: 20,
