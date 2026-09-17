@@ -156,13 +156,13 @@ function HomeA({ lang, setRoute, openProject }) {
       {(() => {
         const stats = lang === 'es'
           ? [
-              { num: '13', label: 'Años de\nexperiencia' },
+              { num: '14', label: 'Años de\nexperiencia' },
               { num: '40+', label: 'Proyectos\nentregados' },
               { num: '6', label: 'Disciplinas\nde diseño' },
               { num: 'COL', label: 'Bucaramanga\nRemoto' },
             ]
           : [
-              { num: '13', label: 'Years of\nexperience' },
+              { num: '14', label: 'Years of\nexperience' },
               { num: '40+', label: 'Projects\ndelivered' },
               { num: '6', label: 'Design\ndisciplines' },
               { num: 'COL', label: 'Bucaramanga\nRemote' },
@@ -226,9 +226,9 @@ function HomeA({ lang, setRoute, openProject }) {
           <div>
             <div style={{ fontFamily: TOKENS.fontMono, fontSize: 11, color: TOKENS.stone500, letterSpacing: 1.5, marginBottom: 10 }}>02 / {I18N.about.kicker[lang]}</div>
             <h2 style={{ fontFamily: TOKENS.fontDisplay, fontWeight: 700, fontSize: 64, margin: 0, letterSpacing: -2, color: TOKENS.ink, textTransform: 'uppercase', lineHeight: 0.92 }}>
-              {lang === 'es' ? <>13 AÑOS<br/>DIRIGIENDO<br/><span style={{ color: TOKENS.terracotta }}>ARTE.</span></> : <>13 YEARS<br/>DIRECTING<br/><span style={{ color: TOKENS.terracotta }}>ART.</span></>}
+              {lang === 'es' ? <>14 AÑOS<br/>DANDO VIDA<br/><span style={{ color: TOKENS.terracotta }}>A LAS IDEAS.</span></> : <>14 YEARS<br/>BRINGING IDEAS<br/><span style={{ color: TOKENS.terracotta }}>TO LIFE.</span></>}
             </h2>
-            <p style={{ fontFamily: TOKENS.fontBody, fontSize: 18, lineHeight: 1.6, color: TOKENS.stone700, marginTop: 32, maxWidth: 520 }}>{I18N.about.bio1[lang]}</p>
+            <p style={{ fontFamily: TOKENS.fontBody, fontSize: 18, lineHeight: 1.6, color: TOKENS.stone700, marginTop: 32, maxWidth: 520 }}>{I18N.about.summary[lang]}</p>
             <button onClick={() => setRoute('about')} className="btn-solid" style={{
               marginTop: 32, padding: '16px 32px', background: TOKENS.green, color: TOKENS.cream,
               border: 'none', borderRadius: 999, cursor: 'pointer',

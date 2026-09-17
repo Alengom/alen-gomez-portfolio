@@ -19,8 +19,8 @@ const I18N = {
     location: { es: 'Bucaramanga · remoto', en: 'Bucaramanga · remote' },
     availability: { es: 'Disponible para proyectos · 2026', en: 'Available for projects · 2026' },
     sub: {
-      es: 'Campañas, UX/UI y piezas visuales para marcas que quieren comunicar con intención. 13 años trabajando en agencia y como freelance desde Colombia.',
-      en: 'Campaigns, UX/UI and visual work for brands that want to communicate with intention. 13 years in agencies and freelance from Colombia.',
+      es: 'Diseñador gráfico con 14 años de experiencia en agencias y como freelance. Creo campañas, experiencias digitales y piezas visuales que ayudan a las marcas a comunicar con claridad y personalidad.',
+      en: 'Graphic designer with 14 years of experience in agencies and as a freelancer. I create campaigns, digital experiences and visual pieces that help brands communicate with clarity and personality.',
     },
     scroll: { es: 'Scroll ↓', en: 'Scroll ↓' },
   },
@@ -34,18 +34,22 @@ const I18N = {
   },
   about: {
     kicker: { es: 'EN PERSONA', en: 'IN PERSON' },
-    title: { es: 'Soy Alen Gómez, de Bucaramanga.', en: "I'm Alen Gómez, from Bucaramanga." },
+    title: { es: 'Soy Alen Gómez', en: "I'm Alen Gómez" },
+    summary: {
+      es: 'Diseñador gráfico con 14 años entre agencias y freelance. Me apasionan la animación, el 3D y la ilustración, y exploro la IA en mi proceso creativo para llevar las ideas más lejos.',
+      en: 'Graphic designer with 14 years across agencies and freelance. I love animation, 3D and illustration, and I explore AI in my creative process to push ideas further.',
+    },
     bio1: {
-      es: 'Llevo 13 años trabajando en diseño y dirección de arte. Empecé en agencias locales en Bucaramanga, pasé por Bogotá, y desde hace años trabajo de forma remota con clientes en Colombia y otros países. Diseño interfaces, dirijo campañas y resuelvo problemas visuales complejos.',
-      en: "I've been working in design and art direction for 13 years. Started in local agencies in Bucaramanga, moved through Bogotá, and for years now I've been working remotely with clients across Colombia and beyond. I design interfaces, direct campaigns, and solve complex visual problems.",
+      es: 'Llevo 14 años trabajando como diseñador gráfico, entre agencias y proyectos freelance. Desde Colombia, he colaborado con marcas y equipos de distintos países, creando campañas y piezas para diferentes medios.',
+      en: "I've spent 14 years working as a graphic designer, between agencies and freelance projects. From Colombia, I've collaborated with brands and teams from different countries, creating campaigns and pieces for a range of media.",
     },
     bio2: {
-      es: 'Mi foco está en UX/UI, dirección de arte para campañas digitales, motion e ilustración. No hago branding de identidad corporativa — hay gente mejor que yo para eso. Lo que sí hago bien es entender qué necesita comunicar una marca y traducirlo en piezas que funcionan.',
-      en: "My focus is UX/UI, art direction for digital campaigns, motion and illustration. I don't do corporate identity branding — there are better people for that. What I do well is understand what a brand needs to say and translate it into pieces that actually work.",
+      es: 'Lo que más disfruto es darle vida a las ideas. Me apasionan la animación, el modelado 3D y la ilustración, aunque me desenvuelvo bien en distintas disciplinas del diseño. Actualmente estoy enamorado de las posibilidades de la inteligencia artificial y la incorporo a mi proceso creativo para llevar mis ideas más lejos. Me gusta explorar nuevas formas de hacer las cosas y combinar lo que he aprendido con lo que voy descubriendo.',
+      en: 'What I enjoy most is bringing ideas to life. I love animation, 3D modeling and illustration, though I move comfortably across different design disciplines. Right now I\'m in love with the possibilities of artificial intelligence and I bring it into my creative process to push my ideas further. I like exploring new ways of doing things and combining what I\'ve learned with what I keep discovering.',
     },
     bio3: {
-      es: 'Trabajo solo o como parte de equipos remotos. Me adapto a proyectos chicos y grandes, con plazos ajustados o con espacio para desarrollar ideas con cuidado.',
-      en: 'I work solo or as part of remote teams. I adapt to small and large projects, tight deadlines or with room to develop ideas carefully.',
+      es: 'Puedo trabajar por mi cuenta o integrarme a un equipo. Me involucro en cada proyecto, desde entender qué necesita comunicar la marca hasta cuidar los detalles del resultado final.',
+      en: 'I can work on my own or join a team. I get involved in every project, from understanding what the brand needs to communicate to caring for the details of the final result.',
     },
   },
 };
