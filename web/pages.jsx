@@ -216,6 +216,58 @@ function AboutPage({ lang }) {
   );
 }
 
+// Formulario de contacto → Web3Forms (llega directo al Gmail, sin backend)
+function ContactForm({ lang }) {
+  const [status, setStatus] = React.useState('idle'); // idle | sending | ok | error
+  const es = lang === 'es';
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('sending');
+    const form = e.target;
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) });
+      const json = await res.json();
+      if (json.success) { setStatus('ok'); form.reset(); } else { setStatus('error'); }
+    } catch (_) { setStatus('error'); }
+  };
+  const field = {
+    width: '100%', background: 'rgba(244,240,230,0.08)', color: TOKENS.cream,
+    border: '1px solid rgba(244,240,230,0.28)', borderRadius: 12,
+    padding: '13px 15px', fontFamily: TOKENS.fontBody, fontSize: 15, outline: 'none',
+    marginBottom: 12, boxSizing: 'border-box',
+  };
+  if (status === 'ok') {
+    return (
+      <div style={{ border: '1px solid rgba(244,240,230,0.28)', borderRadius: 14, padding: '28px 22px', textAlign: 'center' }}>
+        <div style={{ fontFamily: TOKENS.fontDisplay, fontWeight: 700, fontSize: 26, color: TOKENS.cream, letterSpacing: -0.5 }}>{es ? '¡Mensaje enviado!' : 'Message sent!'}</div>
+        <div style={{ fontFamily: TOKENS.fontBody, fontSize: 15, color: TOKENS.cream, opacity: 0.8, marginTop: 8 }}>{es ? 'Gracias, te responderé pronto.' : 'Thanks, I\'ll get back to you soon.'}</div>
+      </div>
+    );
+  }
+  return (
+    <form onSubmit={onSubmit}>
+      <input type="hidden" name="access_key" value="6c26fc99-0c01-4051-9494-707e44b5e650" />
+      <input type="hidden" name="subject" value="Nuevo mensaje desde alengomez.com" />
+      <input type="hidden" name="from_name" value="Portafolio · alengomez.com" />
+      <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" style={{ display: 'none' }} />
+      <input name="name" required placeholder={es ? 'Nombre' : 'Name'} style={field} />
+      <input type="email" name="email" required placeholder={es ? 'Tu correo' : 'Your email'} style={field} />
+      <textarea name="message" required rows={4} placeholder={es ? 'Cuéntame de tu proyecto…' : 'Tell me about your project…'} style={{ ...field, resize: 'vertical', minHeight: 110 }} />
+      <button type="submit" disabled={status === 'sending'} style={{
+        width: '100%', background: TOKENS.terracotta, color: TOKENS.cream, border: 'none',
+        borderRadius: 999, padding: '15px 24px', cursor: status === 'sending' ? 'default' : 'pointer',
+        fontFamily: TOKENS.fontBody, fontSize: 15, fontWeight: 600, opacity: status === 'sending' ? 0.7 : 1,
+        transition: 'opacity .2s ease',
+      }}>{status === 'sending' ? (es ? 'Enviando…' : 'Sending…') : (es ? 'Enviar mensaje' : 'Send message')}</button>
+      {status === 'error' && (
+        <div style={{ fontFamily: TOKENS.fontBody, fontSize: 13, color: TOKENS.cream, opacity: 0.85, marginTop: 10 }}>
+          {es ? 'Hubo un error. Intenta de nuevo o escríbeme por WhatsApp.' : 'Something went wrong. Try again or message me on WhatsApp.'}
+        </div>
+      )}
+    </form>
+  );
+}
+
 function ContactPage({ lang }) {
   const isNarrow = useMedia('(max-width: 900px)');
   return (
@@ -245,7 +297,9 @@ function ContactPage({ lang }) {
               </div>
             </div>
             <div>
-              <div style={{ fontFamily: TOKENS.fontMono, fontSize: 10, letterSpacing: 1.5, opacity: 0.6, marginBottom: 8 }}>{lang === 'es' ? 'UBICACIÓN' : 'BASED IN'}</div>
+              <div style={{ fontFamily: TOKENS.fontMono, fontSize: 10, letterSpacing: 1.5, opacity: 0.6, marginBottom: 12 }}>{lang === 'es' ? 'ENVÍAME UN MENSAJE' : 'SEND ME A MESSAGE'}</div>
+              <ContactForm lang={lang} />
+              <div style={{ fontFamily: TOKENS.fontMono, fontSize: 10, letterSpacing: 1.5, opacity: 0.6, marginTop: 40, marginBottom: 8 }}>{lang === 'es' ? 'UBICACIÓN' : 'BASED IN'}</div>
               <div style={{ fontFamily: TOKENS.fontBody, fontSize: isNarrow ? 16 : 18 }}>Bucaramanga, Colombia<br/>{lang === 'es' ? 'Disponible en remoto' : 'Available remote'}</div>
               <div style={{ fontFamily: TOKENS.fontMono, fontSize: 10, letterSpacing: 1.5, opacity: 0.6, marginTop: isNarrow ? 32 : 40, marginBottom: 8 }}>{lang === 'es' ? 'DISPONIBILIDAD' : 'AVAILABILITY'}</div>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: TOKENS.terracotta, padding: '10px 18px', borderRadius: 999, fontFamily: TOKENS.fontBody, fontSize: 14, fontWeight: 500 }}>
