@@ -356,7 +356,7 @@ function VideoPlayer({ id, poster, lang }) {
   );
 }
 
-function CaseStudyPage({ p, lang, setRoute }) {
+function CaseStudyPage({ p, lang, setRoute, openProject }) {
   const isNarrow = useMedia('(max-width: 900px)');
   if (!p) return null;
   const isDark = ['#005032', '#003520', '#0A0A0A'].includes(p.color);
@@ -452,6 +452,43 @@ function CaseStudyPage({ p, lang, setRoute }) {
           )}
         </div>
       </section>
+      {/* Siguiente proyecto + volver a todos */}
+      {(() => {
+        const idx = PROJECTS.findIndex(x => x.id === p.id);
+        const next = PROJECTS[(idx + 1) % PROJECTS.length];
+        if (!next || next.id === p.id) return null;
+        return (
+          <section style={{ padding: isNarrow ? '4px 20px 56px' : '8px 40px 110px', background: TOKENS.cream }}>
+            <div style={{ maxWidth: 1120, margin: '0 auto' }}>
+              <div style={{ fontFamily: TOKENS.fontMono, fontSize: 11, letterSpacing: 1.5, color: TOKENS.terracotta, marginBottom: 16 }}>
+                {lang === 'es' ? 'SI TE GUSTÓ, MIRA ESTE OTRO' : 'IF YOU LIKED THIS, SEE THIS ONE'}
+              </div>
+              <button onClick={() => openProject && openProject(next)} aria-label={next.title} style={{
+                display: 'block', width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none', padding: 0,
+                borderRadius: 18, overflow: 'hidden', position: 'relative', background: TOKENS.ink,
+                aspectRatio: isNarrow ? '16 / 12' : '16 / 6',
+              }}>
+                <img src={next.image} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                <span style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.2) 55%, rgba(10,10,10,0) 100%)' }} />
+                <span style={{ position: 'absolute', left: 20, right: 20, bottom: 18 }}>
+                  <span style={{ display: 'block', fontFamily: TOKENS.fontMono, fontSize: 10, letterSpacing: 1.5, color: TOKENS.cream, opacity: 0.85 }}>{(next.cat || '').toUpperCase()} · {next.client}</span>
+                  <span style={{ display: 'block', fontFamily: TOKENS.fontDisplay, fontWeight: 700, fontSize: isNarrow ? 26 : 42, lineHeight: 1, letterSpacing: -1, color: TOKENS.cream, textTransform: 'uppercase', marginTop: 6 }}>
+                    {next.title} <span style={{ color: TOKENS.terracotta }}>→</span>
+                  </span>
+                </span>
+              </button>
+              <div style={{ marginTop: 20 }}>
+                <button onClick={() => setRoute('work')} style={{
+                  width: isNarrow ? '100%' : 'auto',
+                  padding: '15px 28px', borderRadius: 999, cursor: 'pointer',
+                  border: `2px solid ${TOKENS.green}`, background: 'transparent', color: TOKENS.green,
+                  fontFamily: TOKENS.fontBody, fontSize: 15, fontWeight: 500,
+                }}>{lang === 'es' ? '← Ver todos los proyectos' : '← View all projects'}</button>
+              </div>
+            </div>
+          </section>
+        );
+      })()}
     </div>
   );
 }
