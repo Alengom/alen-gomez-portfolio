@@ -104,6 +104,17 @@ function Header({ lang, setLang, route, setRoute }) {
 }
 
 function Footer({ lang, setRoute }) {
+  const SOCIALS = [
+    { label: 'Instagram', url: 'https://www.instagram.com/aleng_artist/', icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2zm0 1.8c-3.15 0-3.5.01-4.74.07-.9.04-1.38.19-1.7.32-.43.17-.74.36-1.06.68-.32.32-.51.63-.68 1.06-.13.32-.28.8-.32 1.7C3.44 9.06 3.43 9.4 3.43 12s.01 2.94.07 4.17c.04.9.19 1.38.32 1.7.17.43.36.74.68 1.06.32.32.63.51 1.06.68.32.13.8.28 1.7.32 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c.9-.04 1.38-.19 1.7-.32.43-.17.74-.36 1.06-.68.32-.32.51-.63.68-1.06.13-.32.28-.8.32-1.7.06-1.23.07-1.58.07-4.17s-.01-2.94-.07-4.17c-.04-.9-.19-1.38-.32-1.7a2.85 2.85 0 0 0-.68-1.06 2.85 2.85 0 0 0-1.06-.68c-.32-.13-.8-.28-1.7-.32C15.5 4.01 15.15 4 12 4zm0 3.06A4.94 4.94 0 1 1 7.06 12 4.94 4.94 0 0 1 12 7.06zm0 1.8A3.14 3.14 0 1 0 15.14 12 3.14 3.14 0 0 0 12 8.86zm5.13-1.09a1.15 1.15 0 1 1-1.15-1.15 1.15 1.15 0 0 1 1.15 1.15z"/></svg>
+    ) },
+    { label: 'Behance', url: 'https://www.behance.net/alengomez', icon: (
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor"><path d="M8.8 10.66c.5-.27.79-.76.79-1.4 0-1.28-.98-1.9-2.5-1.9H2.1v9.06h5.05c1.6 0 2.9-.74 2.9-2.48 0-1.07-.5-1.87-1.25-2.28zm-4.6-1.55h2.28c.6 0 1 .3 1 .88s-.4.88-1 .88H4.2V9.11zm2.47 5.5H4.2v-2.06h2.56c.72 0 1.2.35 1.2 1.03 0 .7-.53 1.03-1.29 1.03zM21.9 13.3c0-2-1.14-3.63-3.26-3.63-2.06 0-3.5 1.57-3.5 3.6 0 2.06 1.38 3.55 3.55 3.55 1.68 0 2.8-.79 3.1-2.06h-1.87c-.15.39-.59.59-1.13.59-.84 0-1.33-.49-1.38-1.32h4.44c.02-.2.05-.4.05-.73zm-4.48-.6c.1-.73.54-1.17 1.28-1.17.73 0 1.12.49 1.17 1.17h-2.45zM15.5 8.16h4.24v1.06H15.5z"/></svg>
+    ) },
+    { label: 'LinkedIn', url: 'https://www.linkedin.com/in/alengomez/', icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.6 8.65 22 10.6 22 14.1V21h-4v-6.1c0-1.46-.03-3.34-2.03-3.34-2.03 0-2.34 1.58-2.34 3.23V21H9z"/></svg>
+    ) },
+  ];
   return (
     <footer style={{
       background: TOKENS.green,
@@ -127,12 +138,17 @@ function Footer({ lang, setRoute }) {
           }}>trabajemos@alengomez.com <span style={{ transform: 'rotate(-45deg)' }}>→</span></a>
         </div>
         <div style={{ height: 1, background: 'rgba(244,240,230,0.2)', marginBottom: 24 }} />
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'space-between', fontFamily: TOKENS.fontMono, fontSize: 11, opacity: 0.7, letterSpacing: 1 }}>
-          <div>© 2026 ALEN GOMEZ · {lang === 'es' ? 'TODOS LOS DERECHOS' : 'ALL RIGHTS RESERVED'}</div>
-          <div style={{ display: 'flex', gap: 20 }}>
-            <a href="https://www.instagram.com/aleng_artist/" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>INSTAGRAM</a>
-            <a href="https://www.behance.net/alengomez" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>BEHANCE</a>
-            <a href="https://www.linkedin.com/in/alengomez/" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>LINKEDIN</a>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ fontFamily: TOKENS.fontMono, fontSize: 11, opacity: 0.7, letterSpacing: 1 }}>© 2026 ALEN GOMEZ · {lang === 'es' ? 'TODOS LOS DERECHOS' : 'ALL RIGHTS RESERVED'}</div>
+          <div style={{ display: 'flex', gap: 12 }}>
+            {SOCIALS.map(s => (
+              <a key={s.label} href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="soc-btn" style={{
+                width: 44, height: 44, borderRadius: 999,
+                border: '1px solid rgba(244,240,230,0.4)', color: TOKENS.cream, textDecoration: 'none',
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                transition: 'background .2s ease, border-color .2s ease, color .2s ease',
+              }}>{s.icon}</a>
+            ))}
           </div>
         </div>
       </div>

@@ -32,6 +32,7 @@
   .nav-link:hover { color: #E86A33 !important; }
   .btn-solid:hover { background: #E86A33 !important; }
   .btn-outline:hover { border-color: #E86A33 !important; color: #E86A33 !important; }
+  .soc-btn:hover { background: #E86A33; border-color: #E86A33 !important; color: #F4F0E6; }
   /* Cabeza que se despliega al hacer hover en CV (de abajo hacia arriba) */
   .cv-hover .cv-head {
     position: absolute;
@@ -152,13 +153,13 @@
     </feComponentTransfer>
   </filter>
 </svg>
-<script type="text/babel" src="web/data.jsx?v=38"></script>
-<script type="text/babel" src="web/i18n.jsx?v=38"></script>
-<script type="text/babel" src="web/project-tile.jsx?v=38"></script>
-<script type="text/babel" src="web/chrome.jsx?v=38"></script>
-<script type="text/babel" src="web/home-a.jsx?v=38"></script>
-<script type="text/babel" src="web/home-b.jsx?v=38"></script>
-<script type="text/babel" src="web/pages.jsx?v=38"></script>
+<script type="text/babel" src="web/data.jsx?v=39"></script>
+<script type="text/babel" src="web/i18n.jsx?v=39"></script>
+<script type="text/babel" src="web/project-tile.jsx?v=39"></script>
+<script type="text/babel" src="web/chrome.jsx?v=39"></script>
+<script type="text/babel" src="web/home-a.jsx?v=39"></script>
+<script type="text/babel" src="web/home-b.jsx?v=39"></script>
+<script type="text/babel" src="web/pages.jsx?v=39"></script>
 <script type="text/babel">
 const TWEAKS = /*EDITMODE-BEGIN*/{
   "homeVariant": "A"
@@ -335,7 +336,7 @@ function App() {
         {route === 'contact' && <ContactPage lang={lang} />}
         {route === 'project' && <CaseStudyPage p={currentProject} lang={lang} setRoute={setRoute} />}
       </main>
-      <Footer lang={lang} setRoute={setRoute} />
+      {route !== 'contact' && <Footer lang={lang} setRoute={setRoute} />}
       <BottomNav lang={lang} route={route} setRoute={setRoute} />
 
       {showIntro && <Preloader onLift={() => document.body.classList.add('hero-go')} />}
