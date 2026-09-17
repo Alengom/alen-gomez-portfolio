@@ -229,7 +229,7 @@ function ContactPage({ lang }) {
           <div style={{ display: 'grid', gridTemplateColumns: isNarrow ? '1fr' : '1fr 1fr', gap: isNarrow ? 40 : 80, marginTop: isNarrow ? 40 : 80 }}>
             <div>
               <div style={{ fontFamily: TOKENS.fontMono, fontSize: 10, letterSpacing: 1.5, opacity: 0.6, marginBottom: 8 }}>EMAIL</div>
-              <a href="mailto:hello@alengomez.work" style={{ fontFamily: TOKENS.fontDisplay, fontWeight: 700, fontSize: isNarrow ? 'clamp(26px,8vw,40px)' : 44, color: TOKENS.cream, textDecoration: 'none', letterSpacing: -1, wordBreak: 'break-word' }}>hello@alengomez.work</a>
+              <a href="mailto:trabajemos@alengomez.com" style={{ fontFamily: TOKENS.fontDisplay, fontWeight: 700, fontSize: isNarrow ? 'clamp(26px,8vw,40px)' : 44, color: TOKENS.cream, textDecoration: 'none', letterSpacing: -1, wordBreak: 'break-word' }}>trabajemos@alengomez.com</a>
               <div style={{ marginTop: isNarrow ? 24 : 28 }}>
                 <WhatsAppButton lang={lang} big={!isNarrow} />
               </div>

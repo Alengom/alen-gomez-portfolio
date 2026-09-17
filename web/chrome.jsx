@@ -119,12 +119,12 @@ function Footer({ lang, setRoute }) {
           }}>
             {lang === 'es' ? (<>TRABAJEMOS<br/><span style={{ color: TOKENS.terracotta }}>JUNTOS.</span></>) : (<>LET'S WORK<br/><span style={{ color: TOKENS.terracotta }}>TOGETHER.</span></>)}
           </div>
-          <a href="mailto:hello@alengomez.work" style={{
+          <a href="mailto:trabajemos@alengomez.com" style={{
             padding: '18px 32px', background: TOKENS.terracotta, color: TOKENS.cream,
             borderRadius: 999, textDecoration: 'none',
             fontFamily: TOKENS.fontBody, fontSize: 15, fontWeight: 500,
             display: 'inline-flex', gap: 10, alignItems: 'center',
-          }}>hello@alengomez.work <span style={{ transform: 'rotate(-45deg)' }}>→</span></a>
+          }}>trabajemos@alengomez.com <span style={{ transform: 'rotate(-45deg)' }}>→</span></a>
         </div>
         <div style={{ height: 1, background: 'rgba(244,240,230,0.2)', marginBottom: 24 }} />
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'space-between', fontFamily: TOKENS.fontMono, fontSize: 11, opacity: 0.7, letterSpacing: 1 }}>
