@@ -189,7 +189,7 @@ function AboutPage({ lang }) {
             {I18N.about.title[lang]}
           </h1>
           <div style={{ display: 'grid', gridTemplateColumns: isNarrow ? '1fr' : '1fr 1.5fr', gap: isNarrow ? 32 : 80, marginTop: isNarrow ? 36 : 80, alignItems: 'start' }}>
-            <img src="/assets/foto-work.webp" alt={lang === 'es' ? 'Retrato de Alen Gómez, director de arte' : 'Portrait of Alen Gómez, art director'} style={{ width: '100%', maxWidth: isNarrow ? 300 : 'none', margin: isNarrow ? '0 auto' : 0, display: 'block', filter: 'grayscale(1)', borderRadius: isNarrow ? 12 : 0 }} />
+            <img src="/assets/foto-work.webp" alt={lang === 'es' ? 'Retrato de Alen Gómez, director de arte' : 'Portrait of Alen Gómez, art director'} style={{ width: '100%', maxWidth: isNarrow ? 300 : 'none', margin: isNarrow ? '0 auto' : 0, display: 'block', filter: 'grayscale(1)', borderRadius: isNarrow ? 12 : 0, WebkitMaskImage: 'linear-gradient(to bottom, #000 80%, transparent 100%)', maskImage: 'linear-gradient(to bottom, #000 80%, transparent 100%)' }} />
             <div>
               <p style={{ fontFamily: TOKENS.fontBody, fontSize: isNarrow ? 16 : 20, lineHeight: 1.65, color: TOKENS.stone700, marginTop: isNarrow ? 0 : undefined }}>{I18N.about.bio1[lang]}</p>
               <p style={{ fontFamily: TOKENS.fontBody, fontSize: isNarrow ? 16 : 20, lineHeight: 1.65, color: TOKENS.stone700 }}>{I18N.about.bio2[lang]}</p>
