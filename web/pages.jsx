@@ -197,7 +197,7 @@ function AboutPage({ lang }) {
               <div style={{ marginTop: isNarrow ? 40 : 60, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: isNarrow ? 20 : 40 }}>
                 <div>
                   <div style={{ fontFamily: TOKENS.fontMono, fontSize: 10, letterSpacing: 1.5, color: TOKENS.stone500, marginBottom: 14 }}>{lang === 'es' ? 'AGENCIAS' : 'AGENCIES'}</div>
-                  {['Sancho BBDO · Bogotá', 'MullenLowe SSP3 · Bogotá', 'JWT Colombia · Bogotá', 'Toro Agencia · Bucaramanga', 'Freelance · Remoto'].map(a => (
+                  {['PVS Agencia · Colombia', 'Agencia Genoma · Colombia', 'Nasta / Ogilvy · Paraguay', 'Sol Naciente · Colombia', 'IMCT · Bucaramanga', 'Freelance · Remoto'].map(a => (
                     <div key={a} style={{ fontFamily: TOKENS.fontBody, fontSize: isNarrow ? 13 : 15, color: TOKENS.ink, padding: '8px 0', borderBottom: `1px solid ${TOKENS.stone300}` }}>{a}</div>
                   ))}
                 </div>
