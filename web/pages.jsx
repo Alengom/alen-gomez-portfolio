@@ -178,7 +178,7 @@ function WorkPage({ lang, openProject }) {
   );
 }
 
-function AboutPage({ lang }) {
+function AboutPage({ lang, setRoute }) {
   const isNarrow = useMedia('(max-width: 900px)');
   return (
     <div style={{ background: TOKENS.cream, minHeight: '100vh' }}>
@@ -209,6 +209,16 @@ function AboutPage({ lang }) {
                 </div>
               </div>
             </div>
+          </div>
+          <div style={{ marginTop: isNarrow ? 44 : 72, paddingTop: isNarrow ? 32 : 44, borderTop: `1px solid ${TOKENS.stone300}` }}>
+            <div style={{ fontFamily: TOKENS.fontDisplay, fontWeight: 700, fontSize: isNarrow ? 30 : 48, letterSpacing: -1.5, color: TOKENS.ink, textTransform: 'uppercase', lineHeight: 1 }}>
+              {lang === 'es' ? <>¿Trabajamos <span style={{ color: TOKENS.green }}>juntos?</span></> : <>Let's work <span style={{ color: TOKENS.green }}>together?</span></>}
+            </div>
+            <button onClick={() => setRoute('contact')} className="btn-solid" style={{
+              marginTop: 20, padding: '15px 30px', background: TOKENS.green, color: TOKENS.cream,
+              border: 'none', borderRadius: 999, cursor: 'pointer',
+              fontFamily: TOKENS.fontBody, fontSize: 15, fontWeight: 600,
+            }}>{lang === 'es' ? 'Contáctame →' : 'Contact me →'}</button>
           </div>
         </div>
       </section>

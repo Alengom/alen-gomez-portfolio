@@ -103,8 +103,7 @@ function Header({ lang, setLang, route, setRoute }) {
   );
 }
 
-function Footer({ lang, setRoute }) {
-  const SOCIALS = [
+const SOCIAL_LINKS = [
     { label: 'Instagram', url: 'https://www.instagram.com/aleng_artist/', icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2zm0 1.8c-3.15 0-3.5.01-4.74.07-.9.04-1.38.19-1.7.32-.43.17-.74.36-1.06.68-.32.32-.51.63-.68 1.06-.13.32-.28.8-.32 1.7C3.44 9.06 3.43 9.4 3.43 12s.01 2.94.07 4.17c.04.9.19 1.38.32 1.7.17.43.36.74.68 1.06.32.32.63.51 1.06.68.32.13.8.28 1.7.32 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c.9-.04 1.38-.19 1.7-.32.43-.17.74-.36 1.06-.68.32-.32.51-.63.68-1.06.13-.32.28-.8.32-1.7.06-1.23.07-1.58.07-4.17s-.01-2.94-.07-4.17c-.04-.9-.19-1.38-.32-1.7a2.85 2.85 0 0 0-.68-1.06 2.85 2.85 0 0 0-1.06-.68c-.32-.13-.8-.28-1.7-.32C15.5 4.01 15.15 4 12 4zm0 3.06A4.94 4.94 0 1 1 7.06 12 4.94 4.94 0 0 1 12 7.06zm0 1.8A3.14 3.14 0 1 0 15.14 12 3.14 3.14 0 0 0 12 8.86zm5.13-1.09a1.15 1.15 0 1 1-1.15-1.15 1.15 1.15 0 0 1 1.15 1.15z"/></svg>
     ) },
@@ -115,6 +114,29 @@ function Footer({ lang, setRoute }) {
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.6 8.65 22 10.6 22 14.1V21h-4v-6.1c0-1.46-.03-3.34-2.03-3.34-2.03 0-2.34 1.58-2.34 3.23V21H9z"/></svg>
     ) },
   ];
+
+// Barra vertical de redes fija a la derecha — solo desktop
+function SocialRail() {
+  const isNarrow = useMedia('(max-width: 900px)');
+  if (isNarrow) return null;
+  return (
+    <div style={{ position: 'fixed', right: 20, top: '50%', transform: 'translateY(-50%)', zIndex: 90, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
+      {SOCIAL_LINKS.map(s => (
+        <a key={s.label} href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="soc-btn" style={{
+          width: 40, height: 40, borderRadius: 999, background: TOKENS.cream, color: TOKENS.green,
+          border: `1px solid ${TOKENS.stone300}`, boxShadow: '0 6px 16px rgba(10,10,10,0.14)',
+          display: 'inline-flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none',
+          transition: 'background .2s ease, color .2s ease, transform .2s ease',
+        }}>{s.icon}</a>
+      ))}
+      <span style={{ width: 1, height: 60, background: 'rgba(10,10,10,0.2)', marginTop: 4 }} />
+    </div>
+  );
+}
+
+function Footer({ lang, setRoute }) {
+  const isNarrow = useMedia('(max-width: 900px)');
+  const SOCIALS = SOCIAL_LINKS;
   return (
     <footer style={{
       background: TOKENS.green,
@@ -130,16 +152,23 @@ function Footer({ lang, setRoute }) {
           }}>
             {lang === 'es' ? (<>TRABAJEMOS<br/><span style={{ color: TOKENS.terracotta }}>JUNTOS.</span></>) : (<>LET'S WORK<br/><span style={{ color: TOKENS.terracotta }}>TOGETHER.</span></>)}
           </div>
-          <a href="mailto:trabajemos@alengomez.com" style={{
-            padding: '18px 32px', background: TOKENS.terracotta, color: TOKENS.cream,
-            borderRadius: 999, textDecoration: 'none',
-            fontFamily: TOKENS.fontBody, fontSize: 15, fontWeight: 500,
-            display: 'inline-flex', gap: 10, alignItems: 'center',
-          }}>trabajemos@alengomez.com <span style={{ transform: 'rotate(-45deg)' }}>→</span></a>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'flex-start' }}>
+            <button onClick={() => setRoute('contact')} className="btn-solid" style={{
+              padding: '18px 32px', background: TOKENS.terracotta, color: TOKENS.cream,
+              border: 'none', borderRadius: 999, cursor: 'pointer',
+              fontFamily: TOKENS.fontBody, fontSize: 15, fontWeight: 600,
+              display: 'inline-flex', gap: 10, alignItems: 'center',
+            }}>{lang === 'es' ? 'Contáctame' : 'Contact me'} <span>→</span></button>
+            <a href="mailto:trabajemos@alengomez.com" style={{
+              fontFamily: TOKENS.fontBody, fontSize: 15, color: TOKENS.cream, opacity: 0.85,
+              textDecoration: 'none', display: 'inline-flex', gap: 8, alignItems: 'center',
+            }}>trabajemos@alengomez.com <span style={{ transform: 'rotate(-45deg)' }}>→</span></a>
+          </div>
         </div>
         <div style={{ height: 1, background: 'rgba(244,240,230,0.2)', marginBottom: 24 }} />
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ fontFamily: TOKENS.fontMono, fontSize: 11, opacity: 0.7, letterSpacing: 1 }}>© 2026 ALEN GOMEZ · {lang === 'es' ? 'TODOS LOS DERECHOS' : 'ALL RIGHTS RESERVED'}</div>
+          {isNarrow && (
           <div style={{ display: 'flex', gap: 12 }}>
             {SOCIALS.map(s => (
               <a key={s.label} href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="soc-btn" style={{
@@ -150,6 +179,7 @@ function Footer({ lang, setRoute }) {
               }}>{s.icon}</a>
             ))}
           </div>
+          )}
         </div>
       </div>
     </footer>
@@ -270,3 +300,4 @@ window.Header = Header;
 window.Footer = Footer;
 window.BottomNav = BottomNav;
 window.WhatsAppButton = WhatsAppButton;
+window.SocialRail = SocialRail;
