@@ -157,19 +157,17 @@ function HomeA({ lang, setRoute, openProject }) {
         const stats = lang === 'es'
           ? [
               { num: '14', label: 'Años de\nexperiencia' },
-              { num: '40+', label: 'Proyectos\nentregados' },
               { num: '6', label: 'Disciplinas\nde diseño' },
               { num: 'COL', label: 'Bucaramanga\nRemoto' },
             ]
           : [
               { num: '14', label: 'Years of\nexperience' },
-              { num: '40+', label: 'Projects\ndelivered' },
               { num: '6', label: 'Design\ndisciplines' },
               { num: 'COL', label: 'Bucaramanga\nRemote' },
             ];
         return (
           <section style={{ background: TOKENS.green, color: TOKENS.cream, position: 'relative', zIndex: 2, marginTop: '-38px' }}>
-            <div style={{ maxWidth: 1440, margin: '0 auto', display: 'grid', gridTemplateColumns: isNarrow ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)' }}>
+            <div style={{ maxWidth: 1440, margin: '0 auto', display: 'grid', gridTemplateColumns: isNarrow ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)' }}>
               {stats.map((s, i) => (
                 <div key={i} style={{
                   padding: isNarrow ? '26px 22px' : '40px 48px',
@@ -180,7 +178,7 @@ function HomeA({ lang, setRoute, openProject }) {
                   <div style={{
                     fontFamily: TOKENS.fontDisplay, fontWeight: 700,
                     fontSize: 'clamp(48px, 5vw, 80px)', lineHeight: 1,
-                    letterSpacing: -2, color: i === 3 ? TOKENS.terracotta : TOKENS.cream,
+                    letterSpacing: -2, color: i === stats.length - 1 ? TOKENS.terracotta : TOKENS.cream,
                   }}>{s.num}</div>
                   <div style={{
                     fontFamily: TOKENS.fontMono, fontSize: 11,
