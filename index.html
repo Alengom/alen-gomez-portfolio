@@ -213,25 +213,63 @@ function Preloader({ onLift }) {
   );
 }
 
+// ── Ruteo con hash (#) para compartir links directos de secciones/proyectos ──
+const ROUTE_SLUG = { home: '', work: 'trabajos', about: 'sobre-mi', contact: 'contacto' };
+const SLUG_ROUTE = { '': 'home', 'trabajos': 'work', 'sobre-mi': 'about', 'contacto': 'contact' };
+function parseHash() {
+  const parts = (location.hash || '').replace(/^#\/?/, '').split('/').filter(Boolean);
+  if (parts[0] === 'proyecto' && parts[1]) {
+    const p = (typeof PROJECTS !== 'undefined') ? PROJECTS.find(x => x.id === decodeURIComponent(parts[1])) : null;
+    return p ? { route: 'project', project: p } : { route: 'work', project: null };
+  }
+  return { route: SLUG_ROUTE[parts[0] || ''] || 'home', project: null };
+}
+function buildHash(route, project) {
+  if (route === 'project' && project) return '#/proyecto/' + project.id;
+  const slug = ROUTE_SLUG[route];
+  return slug ? '#/' + slug : '';
+}
+
 function App() {
   const prefersReduced = React.useMemo(
     () => window.matchMedia('(prefers-reduced-motion: reduce)').matches, []
   );
   const [showIntro] = React.useState(() => !prefersReduced);
   const [lang, setLang] = React.useState(() => localStorage.getItem('ag_lang') || 'es');
-  const [route, setRouteState] = React.useState(() => localStorage.getItem('ag_route') || 'home');
-  const [currentProject, setCurrentProject] = React.useState(null);
+  const [route, setRouteState] = React.useState(() => parseHash().route);
+  const [currentProject, setCurrentProject] = React.useState(() => parseHash().project);
   const [variant, setVariant] = React.useState(TWEAKS.homeVariant);
   const [editMode, setEditMode] = React.useState(false);
+  const syncingHash = React.useRef(false);
 
   const setRoute = (r) => {
     setRouteState(r);
-    localStorage.setItem('ag_route', r);
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
   React.useEffect(() => { localStorage.setItem('ag_lang', lang); }, [lang]);
 
-  const openProject = (p) => { setCurrentProject(p); setRoute('project'); };
+  const openProject = (p) => { setCurrentProject(p); setRouteState('project'); window.scrollTo({ top: 0, behavior: 'instant' }); };
+
+  // Sincroniza la URL (#) con la navegación → links compartibles
+  React.useEffect(() => {
+    const desired = buildHash(route, currentProject);
+    if ((location.hash || '').replace(/^#/, '') === desired.replace(/^#/, '')) return;
+    if (desired) { syncingHash.current = true; location.hash = desired; }
+    else { history.replaceState(null, '', location.pathname + location.search); syncingHash.current = false; }
+  }, [route, currentProject]);
+
+  // Responde a atrás/adelante del navegador y a links pegados directamente
+  React.useEffect(() => {
+    const onHash = () => {
+      if (syncingHash.current) { syncingHash.current = false; return; }
+      const s = parseHash();
+      setRouteState(s.route);
+      setCurrentProject(s.project);
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    };
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
 
   // Ensamblaje del hero: si no hay intro (reduced-motion), mostrar todo ya.
   // Fallback: garantizar que el hero se revele aunque el intro se demore.
