@@ -55,7 +55,7 @@ function Header({ lang, setLang, route, setRoute }) {
       <a href="#home" onClick={(e)=>{e.preventDefault(); setRoute('home');}} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
         <div>
           <div style={{ fontFamily: TOKENS.fontBody, fontSize: 16, fontWeight: 600, color: TOKENS.ink, lineHeight: 1 }}>Alen Gomez</div>
-          <div style={{ fontFamily: TOKENS.fontMono, fontSize: 10, color: TOKENS.stone500, letterSpacing: 1, marginTop: 3 }}>ART DIRECTOR</div>
+          <div style={{ fontFamily: TOKENS.fontMono, fontSize: 10, color: TOKENS.stone500, letterSpacing: 1, marginTop: 3 }}>DISEÑADOR GRÁFICO</div>
         </div>
       </a>
       {!isNarrow && (

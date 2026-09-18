@@ -82,7 +82,7 @@ function HomeA({ lang, setRoute, openProject }) {
             fontFamily: TOKENS.fontMono, fontSize: 11, letterSpacing: 1.5, textTransform: 'uppercase',
             color: TOKENS.stone500, marginTop: 12,
           }}>
-            {lang === 'es' ? 'Art Director · Diseñador Senior' : 'Art Director · Senior Designer'}
+            {lang === 'es' ? 'Diseñador Gráfico Senior' : 'Senior Graphic Designer'}
           </div>
           <div className="hero-item" style={{ marginTop: 20 }}>
             <WhatsAppButton lang={lang} />
@@ -112,7 +112,7 @@ function HomeA({ lang, setRoute, openProject }) {
               textTransform: 'none',
               transitionDelay: '.24s',
             }}>
-              {lang === 'es' ? 'Art Director · Diseñador Senior' : 'Art Director · Senior Designer'}
+              {lang === 'es' ? 'Diseñador Gráfico Senior' : 'Senior Graphic Designer'}
             </p>
             <div className="hero-item" style={{ marginTop: 28, transitionDelay: '.3s' }}>
               <WhatsAppButton lang={lang} big />
