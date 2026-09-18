@@ -296,8 +296,125 @@ function WhatsAppButton({ lang, big, style }) {
   );
 }
 
+// Visor de imagen a pantalla completa con zoom (rueda + doble clic en desktop,
+// pellizco/pinch + doble toque en móvil) y arrastre para desplazar.
+// Se abre desde cualquier parte con window.openLightbox(src, alt).
+function Lightbox() {
+  const [src, setSrc] = React.useState(null);
+  const [alt, setAlt] = React.useState('');
+  const [scale, setScale] = React.useState(1);
+  const [tx, setTx] = React.useState(0);
+  const [ty, setTy] = React.useState(0);
+  const pts = React.useRef(new Map()); // punteros activos (para pinch)
+  const gesture = React.useRef({});    // estado del gesto en curso
+
+  const MIN = 1, MAX = 5;
+  const reset = () => { setScale(1); setTx(0); setTy(0); };
+  const close = () => { setSrc(null); reset(); };
+
+  React.useEffect(() => {
+    const onOpen = (e) => { setSrc(e.detail.src); setAlt(e.detail.alt || ''); setScale(1); setTx(0); setTy(0); };
+    window.addEventListener('lightbox:open', onOpen);
+    return () => window.removeEventListener('lightbox:open', onOpen);
+  }, []);
+
+  React.useEffect(() => {
+    if (!src) return;
+    const onKey = (e) => { if (e.key === 'Escape') close(); };
+    document.addEventListener('keydown', onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = prev; };
+  }, [src]);
+
+  if (!src) return null;
+
+  const clampScale = (s) => Math.max(MIN, Math.min(MAX, s));
+
+  const onWheel = (e) => {
+    e.preventDefault();
+    const next = clampScale(scale * (e.deltaY < 0 ? 1.18 : 0.85));
+    if (next === 1) reset(); else setScale(next);
+  };
+  const onDoubleClick = () => { if (scale > 1) reset(); else setScale(2.4); };
+
+  const onPointerDown = (e) => {
+    pts.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    try { e.currentTarget.setPointerCapture(e.pointerId); } catch (_) {}
+    if (pts.current.size === 1) {
+      gesture.current = { mode: 'pan', sx: e.clientX, sy: e.clientY, tx, ty, moved: 0, t: Date.now() };
+    } else if (pts.current.size === 2) {
+      const [a, b] = [...pts.current.values()];
+      gesture.current = { mode: 'pinch', dist: Math.hypot(a.x - b.x, a.y - b.y), scale };
+    }
+  };
+  const onPointerMove = (e) => {
+    if (!pts.current.has(e.pointerId)) return;
+    pts.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    const g = gesture.current;
+    if (g.mode === 'pinch' && pts.current.size >= 2) {
+      const [a, b] = [...pts.current.values()];
+      const dist = Math.hypot(a.x - b.x, a.y - b.y);
+      setScale(clampScale(g.scale * (dist / (g.dist || dist))));
+    } else if (g.mode === 'pan' && scale > 1) {
+      const dx = e.clientX - g.sx, dy = e.clientY - g.sy;
+      g.moved = Math.max(g.moved, Math.abs(dx) + Math.abs(dy));
+      setTx(g.tx + dx); setTy(g.ty + dy);
+    } else if (g.mode === 'pan') {
+      g.moved = Math.max(g.moved, Math.abs(e.clientX - g.sx) + Math.abs(e.clientY - g.sy));
+    }
+  };
+  const onPointerUp = (e) => {
+    const g = gesture.current;
+    pts.current.delete(e.pointerId);
+    if (pts.current.size < 2 && g.mode === 'pinch') { gesture.current = {}; if (scale <= 1.02) reset(); }
+    // Toque simple sin arrastre sobre el fondo cierra; sobre la imagen no
+    if (pts.current.size === 0 && g.mode === 'pan' && (g.moved || 0) < 6 && scale <= 1) {
+      // manejado por onClick del backdrop
+    }
+    if (pts.current.size === 0) gesture.current = {};
+  };
+
+  return (
+    <div
+      onClick={(e) => { if (e.target === e.currentTarget) close(); }}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 300, background: 'rgba(8,8,8,0.94)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        touchAction: 'none', animation: 'lbFade .2s ease',
+      }}>
+      <button onClick={close} aria-label="Cerrar" style={{
+        position: 'fixed', top: 'max(16px, env(safe-area-inset-top))', right: 16, zIndex: 2,
+        width: 44, height: 44, borderRadius: 999, border: 'none', cursor: 'pointer',
+        background: 'rgba(244,240,230,0.14)', color: TOKENS.cream, fontSize: 22, lineHeight: 1,
+        display: 'inline-flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(6px)',
+      }}>×</button>
+      <span style={{
+        position: 'fixed', bottom: 'max(18px, env(safe-area-inset-bottom))', left: '50%', transform: 'translateX(-50%)',
+        fontFamily: TOKENS.fontMono, fontSize: 10, letterSpacing: 1.5, color: 'rgba(244,240,230,0.6)', pointerEvents: 'none',
+      }}>{scale > 1 ? 'ARRASTRA · DOBLE TOQUE PARA SALIR' : 'PELLIZCA O DOBLE TOQUE PARA ACERCAR'}</span>
+      <img
+        src={src} alt={alt} draggable="false"
+        onWheel={onWheel} onDoubleClick={onDoubleClick}
+        onPointerDown={onPointerDown} onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp} onPointerCancel={onPointerUp}
+        style={{
+          maxWidth: '94vw', maxHeight: '90vh', objectFit: 'contain', userSelect: 'none',
+          transform: `translate(${tx}px, ${ty}px) scale(${scale})`,
+          transformOrigin: 'center center',
+          transition: gesture.current.mode ? 'none' : 'transform .22s ease',
+          cursor: scale > 1 ? 'grab' : 'zoom-in',
+          borderRadius: 6, boxShadow: '0 30px 80px rgba(0,0,0,0.6)',
+        }}
+      />
+    </div>
+  );
+}
+window.openLightbox = (src, alt) => window.dispatchEvent(new CustomEvent('lightbox:open', { detail: { src, alt } }));
+
 window.Header = Header;
 window.Footer = Footer;
 window.BottomNav = BottomNav;
 window.WhatsAppButton = WhatsAppButton;
 window.SocialRail = SocialRail;
+window.Lightbox = Lightbox;

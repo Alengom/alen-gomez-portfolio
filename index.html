@@ -91,6 +91,7 @@
   .pop-in { animation: popIn .5s cubic-bezier(.34,1.56,.64,1) both; }
   /* Estiramiento líquido de la burbuja del tab bar al deslizarse */
   @keyframes liquid { 0% { transform: scaleX(1) scaleY(1); } 35% { transform: scaleX(1.6) scaleY(.86); } 70% { transform: scaleX(.9) scaleY(1.05); } 100% { transform: scaleX(1) scaleY(1); } }
+  @keyframes lbFade { from { opacity: 0; } to { opacity: 1; } }
   .liquid { animation: liquid .52s cubic-bezier(.4,.1,.2,1) both; }
   @media (prefers-reduced-motion: reduce) { .fade-up, .pop-in, .liquid { animation: none; } }
 
@@ -153,13 +154,13 @@
     </feComponentTransfer>
   </filter>
 </svg>
-<script type="text/babel" src="web/data.jsx?v=41"></script>
-<script type="text/babel" src="web/i18n.jsx?v=41"></script>
-<script type="text/babel" src="web/project-tile.jsx?v=41"></script>
-<script type="text/babel" src="web/chrome.jsx?v=41"></script>
-<script type="text/babel" src="web/home-a.jsx?v=41"></script>
-<script type="text/babel" src="web/home-b.jsx?v=41"></script>
-<script type="text/babel" src="web/pages.jsx?v=41"></script>
+<script type="text/babel" src="web/data.jsx?v=42"></script>
+<script type="text/babel" src="web/i18n.jsx?v=42"></script>
+<script type="text/babel" src="web/project-tile.jsx?v=42"></script>
+<script type="text/babel" src="web/chrome.jsx?v=42"></script>
+<script type="text/babel" src="web/home-a.jsx?v=42"></script>
+<script type="text/babel" src="web/home-b.jsx?v=42"></script>
+<script type="text/babel" src="web/pages.jsx?v=42"></script>
 <script type="text/babel">
 const TWEAKS = /*EDITMODE-BEGIN*/{
   "homeVariant": "A"
@@ -339,6 +340,7 @@ function App() {
       {route !== 'contact' && <Footer lang={lang} setRoute={setRoute} />}
       <BottomNav lang={lang} route={route} setRoute={setRoute} />
       <SocialRail />
+      <Lightbox />
 
       {showIntro && <Preloader onLift={() => document.body.classList.add('hero-go')} />}
 
