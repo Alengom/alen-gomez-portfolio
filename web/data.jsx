@@ -582,6 +582,76 @@ const PROJECTS = [
       en: 'Editorial layout for UNAB’s magazine: grid, type hierarchy and page rhythm so the content breathes and reads clearly.',
     },
   },
+  {
+    id: 'amb-2023', title: 'AMB 2023', client: 'amb', cat: 'rrss', year: 2023,
+    agency: 'Bucaramanga, Colombia', color: '#005032', accent: '#E86A33',
+    image: `${IMG}/amb-2023/cover.webp`,
+    role: { es: 'Diseño · Look & feel · RRSS', en: 'Design · Look & feel · Social' },
+    sections: [
+      {
+        k: { es: 'Brief', en: 'Brief' },
+        t: {
+          es: [
+            'Se desarrolló un nuevo look gráfico para 2023 con el fin de darle nueva vida a la presencia en redes del amb, el acueducto metropolitano de Bucaramanga.',
+            'Definí tipografía, color y estructura de piezas para que cada publicación del feed se sintiera parte de una misma identidad —clara, cercana y fácil de leer—.',
+          ],
+          en: [
+            'A new graphic look was developed for 2023 to bring fresh life to the social media presence of amb, the metropolitan water utility of Bucaramanga.',
+            'I defined typography, color and a piece structure so every post in the feed felt part of a single identity —clear, approachable and easy to read.',
+          ],
+        },
+        images: [
+          { src: `${IMG}/amb-2023/cover.webp`, label: { es: 'Look 2023 · portada', en: '2023 look · cover' }, wide: true },
+        ],
+      },
+      {
+        k: { es: 'Piezas para redes', en: 'Social pieces' },
+        images: [
+          { src: `${IMG}/amb-2023/look-01.webp` }, { src: `${IMG}/amb-2023/look-02.webp` },
+          { src: `${IMG}/amb-2023/look-03.webp` }, { src: `${IMG}/amb-2023/look-04.webp` },
+          { src: `${IMG}/amb-2023/look-05.webp` }, { src: `${IMG}/amb-2023/look-06.webp` },
+          { src: `${IMG}/amb-2023/look-07.webp` }, { src: `${IMG}/amb-2023/look-08.webp` },
+          { src: `${IMG}/amb-2023/look-09.webp` }, { src: `${IMG}/amb-2023/look-10.webp` },
+          { src: `${IMG}/amb-2023/look-11.webp` }, { src: `${IMG}/amb-2023/look-12.webp` },
+          { src: `${IMG}/amb-2023/look-13.webp` }, { src: `${IMG}/amb-2023/look-14.webp` },
+          { src: `${IMG}/amb-2023/look-15.webp` }, { src: `${IMG}/amb-2023/look-16.webp` },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'limpieza-urbana-2023', title: 'Limpieza Urbana', client: 'Limpieza Urbana', cat: 'rrss', year: 2023,
+    agency: 'Bucaramanga, Colombia', color: '#0A0A0A', accent: '#E86A33',
+    image: `${IMG}/limpieza-urbana-2023/cover.webp`,
+    role: { es: 'Diseño · Look & feel · RRSS', en: 'Design · Look & feel · Social' },
+    sections: [
+      {
+        k: { es: 'Brief', en: 'Brief' },
+        t: {
+          es: [
+            'Se desarrolló el look gráfico para las redes sociales de Limpieza Urbana, la entidad encargada del aseo de la ciudad.',
+            'El reto era comunicar servicios, rutas y campañas de limpieza con un sistema visual ordenado y reconocible —fácil de leer en el feed y coherente campaña tras campaña—.',
+          ],
+          en: [
+            'The graphic look for the social media of Limpieza Urbana —the entity in charge of the city’s cleaning— was developed.',
+            'The challenge was to communicate services, routes and cleaning campaigns with a tidy, recognizable visual system —easy to read in the feed and consistent campaign after campaign.',
+          ],
+        },
+        images: [
+          { src: `${IMG}/limpieza-urbana-2023/cover.webp`, label: { es: 'Look · portada', en: 'Look · cover' }, wide: true },
+        ],
+      },
+      {
+        k: { es: 'Piezas para redes', en: 'Social pieces' },
+        images: [
+          { src: `${IMG}/limpieza-urbana-2023/s01.webp` }, { src: `${IMG}/limpieza-urbana-2023/s02.webp` },
+          { src: `${IMG}/limpieza-urbana-2023/s03.webp` }, { src: `${IMG}/limpieza-urbana-2023/s04.webp` },
+          { src: `${IMG}/limpieza-urbana-2023/s05.webp` }, { src: `${IMG}/limpieza-urbana-2023/s06.webp` },
+          { src: `${IMG}/limpieza-urbana-2023/s07.webp` }, { src: `${IMG}/limpieza-urbana-2023/s08.webp` },
+        ],
+      },
+    ],
+  },
 ];
 
 // Asignar categorías (multi) a cada proyecto
