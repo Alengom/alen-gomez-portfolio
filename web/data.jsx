@@ -585,7 +585,7 @@ const PROJECTS = [
   {
     id: 'amb-2023', title: 'AMB 2023', client: 'amb', cat: 'rrss', year: 2023,
     agency: 'Bucaramanga, Colombia', color: '#005032', accent: '#E86A33',
-    image: `${IMG}/amb-2023/cover.webp`,
+    image: `${IMG}/amb-2023/look-14.webp`,
     role: { es: 'Diseño · Look & feel · RRSS', en: 'Design · Look & feel · Social' },
     sections: [
       {
@@ -607,14 +607,14 @@ const PROJECTS = [
       {
         k: { es: 'Piezas para redes', en: 'Social pieces' },
         images: [
-          { src: `${IMG}/amb-2023/look-01.webp` }, { src: `${IMG}/amb-2023/look-02.webp` },
-          { src: `${IMG}/amb-2023/look-03.webp` }, { src: `${IMG}/amb-2023/look-04.webp` },
-          { src: `${IMG}/amb-2023/look-05.webp` }, { src: `${IMG}/amb-2023/look-06.webp` },
-          { src: `${IMG}/amb-2023/look-07.webp` }, { src: `${IMG}/amb-2023/look-08.webp` },
-          { src: `${IMG}/amb-2023/look-09.webp` }, { src: `${IMG}/amb-2023/look-10.webp` },
-          { src: `${IMG}/amb-2023/look-11.webp` }, { src: `${IMG}/amb-2023/look-12.webp` },
-          { src: `${IMG}/amb-2023/look-13.webp` }, { src: `${IMG}/amb-2023/look-14.webp` },
-          { src: `${IMG}/amb-2023/look-15.webp` }, { src: `${IMG}/amb-2023/look-16.webp` },
+          { src: `${IMG}/amb-2023/look-01.webp`, wide: true }, { src: `${IMG}/amb-2023/look-02.webp`, wide: true },
+          { src: `${IMG}/amb-2023/look-03.webp`, wide: true }, { src: `${IMG}/amb-2023/look-04.webp`, wide: true },
+          { src: `${IMG}/amb-2023/look-05.webp`, wide: true }, { src: `${IMG}/amb-2023/look-06.webp`, wide: true },
+          { src: `${IMG}/amb-2023/look-07.webp`, wide: true }, { src: `${IMG}/amb-2023/look-08.webp`, wide: true },
+          { src: `${IMG}/amb-2023/look-09.webp`, wide: true }, { src: `${IMG}/amb-2023/look-10.webp`, wide: true },
+          { src: `${IMG}/amb-2023/look-11.webp`, wide: true }, { src: `${IMG}/amb-2023/look-12.webp`, wide: true },
+          { src: `${IMG}/amb-2023/look-13.webp`, wide: true }, { src: `${IMG}/amb-2023/look-14.webp`, wide: true },
+          { src: `${IMG}/amb-2023/look-15.webp`, wide: true }, { src: `${IMG}/amb-2023/look-16.webp`, wide: true },
         ],
       },
     ],
@@ -622,7 +622,7 @@ const PROJECTS = [
   {
     id: 'limpieza-urbana-2023', title: 'Limpieza Urbana', client: 'Limpieza Urbana', cat: 'rrss', year: 2023,
     agency: 'Bucaramanga, Colombia', color: '#0A0A0A', accent: '#E86A33',
-    image: `${IMG}/limpieza-urbana-2023/cover.webp`,
+    image: `${IMG}/limpieza-urbana-2023/s07.webp`,
     role: { es: 'Diseño · Look & feel · RRSS', en: 'Design · Look & feel · Social' },
     sections: [
       {
@@ -644,10 +644,10 @@ const PROJECTS = [
       {
         k: { es: 'Piezas para redes', en: 'Social pieces' },
         images: [
-          { src: `${IMG}/limpieza-urbana-2023/s01.webp` }, { src: `${IMG}/limpieza-urbana-2023/s02.webp` },
-          { src: `${IMG}/limpieza-urbana-2023/s03.webp` }, { src: `${IMG}/limpieza-urbana-2023/s04.webp` },
-          { src: `${IMG}/limpieza-urbana-2023/s05.webp` }, { src: `${IMG}/limpieza-urbana-2023/s06.webp` },
-          { src: `${IMG}/limpieza-urbana-2023/s07.webp` }, { src: `${IMG}/limpieza-urbana-2023/s08.webp` },
+          { src: `${IMG}/limpieza-urbana-2023/s01.webp`, wide: true }, { src: `${IMG}/limpieza-urbana-2023/s02.webp`, wide: true },
+          { src: `${IMG}/limpieza-urbana-2023/s03.webp`, wide: true }, { src: `${IMG}/limpieza-urbana-2023/s04.webp`, wide: true },
+          { src: `${IMG}/limpieza-urbana-2023/s05.webp`, wide: true }, { src: `${IMG}/limpieza-urbana-2023/s06.webp`, wide: true },
+          { src: `${IMG}/limpieza-urbana-2023/s07.webp`, wide: true }, { src: `${IMG}/limpieza-urbana-2023/s08.webp`, wide: true },
         ],
       },
     ],
