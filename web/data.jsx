@@ -38,6 +38,7 @@ const CATEGORIES = [
 
 // Categorías por proyecto (un proyecto puede estar en varias). Fallback: [cat].
 const PROJECT_CATS = {
+  'kitkat-f1': ['campaign', 'keyvisual', 'animation', 'rrss'],
   'primera-estrella': ['campaign', 'ia', 'animation'],
   'atr-alex': ['campaign', 'animation'],
   'golazo': ['campaign', 'animation'],
@@ -49,6 +50,73 @@ const IMG = '/public/projects';
 
 // Projects — trabajo real de Alen Gómez
 const PROJECTS = [
+  {
+    id: 'kitkat-f1', title: 'Break al GP', client: 'KitKat', cat: 'campaign', year: 2026,
+    agency: 'KitKat · Paraguay', color: '#0A0A0A', accent: '#E4002B',
+    image: `${IMG}/kitkat-f1/kv.webp`,
+    role: { es: 'Key Visual · PDV/POP · Animación', en: 'Key Visual · POS/POP · Animation' },
+    sections: [
+      {
+        k: { es: 'Brief', en: 'Brief' },
+        t: {
+          es: [
+            'KitKat ya era el chocolate oficial de la Fórmula 1. El reto era traer esa alianza global a Paraguay y hacer que la gente la sintiera suya.',
+            'La mecánica fue simple y contundente: compra KitKat, registra tu número de lote y participa por una de las 6 experiencias completas en el Gran Premio de Brasil —el GP de São Paulo, una de las carreras más salvajes del calendario—.',
+          ],
+          en: [
+            'KitKat was already the official chocolate of Formula 1. The challenge was to bring that global alliance to Paraguay and make people feel it as their own.',
+            'The mechanic was simple and powerful: buy KitKat, register your batch number and enter to win one of 6 complete experiences at the Brazilian Grand Prix —the São Paulo GP, one of the wildest races on the calendar.',
+          ],
+        },
+        images: [
+          { src: `${IMG}/kitkat-f1/kv.webp`, label: { es: 'Key visual principal', en: 'Main key visual' }, wide: true },
+        ],
+      },
+      {
+        k: { es: 'El key visual', en: 'The key visual' },
+        t: {
+          es: ['Resalté la velocidad con líneas neón amarillas heredadas del brandkit global enviado desde Suiza, y de fondo la ciudad de São Paulo para reforzar toda la idea.'],
+          en: ['I emphasized speed with neon-yellow lines inherited from the global brandkit sent from Switzerland, with the city of São Paulo in the background to reinforce the whole idea.'],
+        },
+        images: [
+          { src: `${IMG}/kitkat-f1/render-auto.webp`, label: { es: 'Render · velocidad F1', en: 'Render · F1 speed' }, wide: true },
+        ],
+      },
+      {
+        k: { es: 'PDV & POP', en: 'POS & POP' },
+        t: {
+          es: ['Se desarrollaron distintas piezas de punto de venta y material POP: exhibidor de piso, stand de activación, cenefa, góndola, webler y cartel.'],
+          en: ['A range of point-of-sale and POP pieces were developed: floor display, activation stand, shelf strip, gondola, wobbler and poster.'],
+        },
+        images: [
+          { src: `${IMG}/kitkat-f1/exhibidor.webp`, label: { es: 'Exhibidor de piso', en: 'Floor display' } },
+          { src: `${IMG}/kitkat-f1/stand.webp`, label: { es: 'Stand de activación', en: 'Activation stand' } },
+          { src: `${IMG}/kitkat-f1/cenefa.webp`, label: { es: 'Cenefa', en: 'Shelf strip' } },
+          { src: `${IMG}/kitkat-f1/gondola.webp`, label: { es: 'Góndola', en: 'Gondola' } },
+          { src: `${IMG}/kitkat-f1/webler.webp`, label: { es: 'Webler', en: 'Wobbler' } },
+          { src: `${IMG}/kitkat-f1/cartel.webp`, label: { es: 'Cartel', en: 'Poster' } },
+        ],
+      },
+      {
+        k: { es: 'Vía pública', en: 'Out of home' },
+        images: [
+          { src: `${IMG}/kitkat-f1/refugio.webp`, label: { es: 'Refugio · parada de bus', en: 'Bus-stop shelter' }, wide: true },
+        ],
+      },
+      {
+        k: { es: 'Piezas animadas · Redes', en: 'Animated pieces · Social' },
+        t: {
+          es: ['Para redes sociales desarrollé un set de piezas animadas que llevaron la energía de la Fórmula 1 al feed —velocidad, neón y ritmo, cuadro a cuadro—.'],
+          en: ['For social media I developed a set of animated pieces that brought the energy of Formula 1 to the feed —speed, neon and rhythm, frame by frame.'],
+        },
+        images: [
+          { src: `${IMG}/kitkat-f1/anim-kv.webp`, label: { es: 'Key visual animado', en: 'Animated key visual' } },
+          { src: `${IMG}/kitkat-f1/reel-2.webp`, label: { es: 'Reel · redes', en: 'Reel · social' } },
+          { src: `${IMG}/kitkat-f1/reel-3.webp`, label: { es: 'Reel · redes', en: 'Reel · social' } },
+        ],
+      },
+    ],
+  },
   {
     id: 'primera-estrella', title: 'Nuestra Primera Estrella', client: 'Alex', cat: 'campaign', year: 2025,
     agency: 'Alex · Paraguay', color: '#0A0A0A', accent: '#E86A33',
