@@ -62,10 +62,12 @@ const PROJECTS = [
           es: [
             'KitKat ya era el chocolate oficial de la Fórmula 1. El reto era traer esa alianza global a Paraguay y hacer que la gente la sintiera suya.',
             'La mecánica fue simple y contundente: compra KitKat, registra tu número de lote y participa por una de las 6 experiencias completas en el Gran Premio de Brasil —el GP de São Paulo, una de las carreras más salvajes del calendario—.',
+            'Resalté la velocidad con líneas neón amarillas heredadas del brandkit global enviado desde Suiza, y de fondo la ciudad de São Paulo para reforzar toda la idea.',
           ],
           en: [
             'KitKat was already the official chocolate of Formula 1. The challenge was to bring that global alliance to Paraguay and make people feel it as their own.',
             'The mechanic was simple and powerful: buy KitKat, register your batch number and enter to win one of 6 complete experiences at the Brazilian Grand Prix —the São Paulo GP, one of the wildest races on the calendar.',
+            'I emphasized speed with neon-yellow lines inherited from the global brandkit sent from Switzerland, with the city of São Paulo in the background to reinforce the whole idea.',
           ],
         },
         images: [
@@ -73,28 +75,19 @@ const PROJECTS = [
         ],
       },
       {
-        k: { es: 'El key visual', en: 'The key visual' },
+        k: { es: 'Marketing directo · PDV & POP', en: 'Direct marketing · POS & POP' },
+        tiles: true,
         t: {
-          es: ['Resalté la velocidad con líneas neón amarillas heredadas del brandkit global enviado desde Suiza, y de fondo la ciudad de São Paulo para reforzar toda la idea.'],
-          en: ['I emphasized speed with neon-yellow lines inherited from the global brandkit sent from Switzerland, with the city of São Paulo in the background to reinforce the whole idea.'],
+          es: ['El sistema bajó al punto de venta como marketing directo: cartel, exhibidor de piso, stand de activación, cenefa, góndola y webler —cada pieza pensada para captar la compra en el momento y lugar exactos—.'],
+          en: ['The system reached the point of sale as direct marketing: poster, floor display, activation stand, shelf strip, gondola and wobbler —each piece designed to capture the purchase at the exact time and place.'],
         },
         images: [
-          { src: `${IMG}/kitkat-f1/render-auto.webp`, label: { es: 'Render · velocidad F1', en: 'Render · F1 speed' }, wide: true },
-        ],
-      },
-      {
-        k: { es: 'PDV & POP', en: 'POS & POP' },
-        t: {
-          es: ['Se desarrollaron distintas piezas de punto de venta y material POP: exhibidor de piso, stand de activación, cenefa, góndola, webler y cartel.'],
-          en: ['A range of point-of-sale and POP pieces were developed: floor display, activation stand, shelf strip, gondola, wobbler and poster.'],
-        },
-        images: [
+          { src: `${IMG}/kitkat-f1/cartel.webp`, label: { es: 'Cartel', en: 'Poster' } },
           { src: `${IMG}/kitkat-f1/exhibidor.webp`, label: { es: 'Exhibidor de piso', en: 'Floor display' } },
           { src: `${IMG}/kitkat-f1/stand.webp`, label: { es: 'Stand de activación', en: 'Activation stand' } },
           { src: `${IMG}/kitkat-f1/cenefa.webp`, label: { es: 'Cenefa', en: 'Shelf strip' } },
           { src: `${IMG}/kitkat-f1/gondola.webp`, label: { es: 'Góndola', en: 'Gondola' } },
           { src: `${IMG}/kitkat-f1/webler.webp`, label: { es: 'Webler', en: 'Wobbler' } },
-          { src: `${IMG}/kitkat-f1/cartel.webp`, label: { es: 'Cartel', en: 'Poster' } },
         ],
       },
       {

@@ -415,10 +415,16 @@ function CaseStudyPage({ p, lang, setRoute, openProject }) {
                     </figure>
                   )}
                   {imgs.length > 0 && (
-                    <div style={{ marginTop: (s.k || txt || s.video) ? 32 : 0, display: 'grid', gridTemplateColumns: gridCols, gap: 20, alignItems: 'start' }}>
+                    <div style={{ marginTop: (s.k || txt || s.video) ? 32 : 0, display: 'grid', gridTemplateColumns: s.tiles ? 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))' : gridCols, gap: 20, alignItems: s.tiles ? 'stretch' : 'start' }}>
                       {imgs.map((im, i) => (
-                        <figure key={i} style={{ margin: 0, gridColumn: im.wide ? '1 / -1' : 'auto' }}>
-                          <img src={im.src} alt={im.label ? im.label[lang] : `${p.title} — ${p.client}`} loading="lazy" onClick={() => window.openLightbox(im.src, im.label ? im.label[lang] : p.title)} style={{ width: '100%', display: 'block', cursor: 'zoom-in' }} />
+                        <figure key={i} style={{ margin: 0, gridColumn: (im.wide && !s.tiles) ? '1 / -1' : 'auto' }}>
+                          {s.tiles ? (
+                            <div onClick={() => window.openLightbox(im.src, im.label ? im.label[lang] : p.title)} style={{ aspectRatio: '4 / 3', background: TOKENS.cream100, borderRadius: 12, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'zoom-in' }}>
+                              <img src={im.src} alt={im.label ? im.label[lang] : `${p.title} — ${p.client}`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
+                            </div>
+                          ) : (
+                            <img src={im.src} alt={im.label ? im.label[lang] : `${p.title} — ${p.client}`} loading="lazy" onClick={() => window.openLightbox(im.src, im.label ? im.label[lang] : p.title)} style={{ width: '100%', display: 'block', cursor: 'zoom-in' }} />
+                          )}
                           {im.label && <figcaption style={{ fontFamily: TOKENS.fontMono, fontSize: 10, letterSpacing: 1.5, color: TOKENS.stone500, marginTop: 10 }}>{im.label[lang].toUpperCase()}</figcaption>}
                         </figure>
                       ))}
